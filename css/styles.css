@@ -7,6 +7,7 @@
   --main-bottun-color: #f5f4fa;
   --social-icon-color: #afb1b8;
   --main-text-font-famaly: 'Roboto', sans-serif;
+  --animation-cube: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 ul {
@@ -68,9 +69,12 @@ nav .nav-link,
   padding-top: 32px;
   padding-bottom: 32px;
   color: var(--main-black-color);
+
+  transition: color 250ms var(--animation-cube);
 }
 .contacts {
   color: inherit;
+  transition: color 250ms var(--animation-cube);
 }
 .nav-link:hover,
 .nav-link:focus,
@@ -115,6 +119,22 @@ nav .nav-link,
   margin-right: 10px;
   fill: currentColor;
   cursor: pointer;
+}
+.underline {
+  position: relative;
+}
+.underline::after {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+
+  content: '';
+
+  display: block;
+  width: 100%;
+  height: 4px;
+  background-color: var(--accent-blue-color);
+  border-radius: 2px;
 }
 
 /* section hero */
@@ -241,6 +261,27 @@ img {
   margin-left: 30px;
 }
 
+.works-list > .item {
+  position: relative;
+}
+.works-item-title {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  display: block;
+
+  width: 100%;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.14;
+  text-align: center;
+  padding-top: 27px;
+  padding-bottom: 27px;
+  text-transform: uppercase;
+  color: var(--main-white-color);
+
+  background: rgba(47, 48, 58, 0.8);
+}
 /* section team */
 
 .team-list p {
@@ -288,12 +329,15 @@ img {
   height: 44px;
   padding: 12px;
   color: var(--social-icon-color);
+  border-radius: 50%;
+
+  transition: background-color 250ms var(--animation-cube), color 250ms var(--animation-cube);
 }
 
 .social-link:hover,
 .social-link:focus {
   background-color: var(--accent-blue-color);
-  border-radius: 50%;
+
   color: var(--main-white-color);
 }
 
@@ -326,8 +370,9 @@ img {
   border-radius: 4px;
   justify-content: center;
   align-items: center;
-
   color: var(--social-icon-color);
+
+  transition: color 250ms var(--animation-cube), border 250ms var(--animation-cube);
 }
 
 .client-link:hover,
@@ -366,6 +411,8 @@ img {
   margin-top: 9px;
   color: var(--aditional-white-color);
   text-decoration: none;
+
+  transition: color 250ms var(--animation-cube);
 }
 
 .ftr-nav {
@@ -397,6 +444,8 @@ img {
   color: var(--main-white-color);
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 50%;
+
+  transition: background-color 250ms var(--animation-cube);
 }
 .social-invite-link:hover,
 .social-invite-link:focus {
@@ -442,6 +491,9 @@ img {
   color: var(--main-black-color);
   background-color: var(--main-bottun-color);
   cursor: pointer;
+
+  transition: background-color 250ms var(--animation-cube), color 250ms var(--animation-cube),
+    box-shadow 250ms var(--animation-cube);
 }
 .filter:hover,
 .filter:focus {
@@ -490,5 +542,90 @@ img {
 .examples > li:hover,
 .examples > li:focus {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+.product-thumb {
+  position: relative;
+  overflow: hidden;
+}
+
+.product-thumb::before {
+  content: '';
+
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(33, 150, 243, 0.9);
+
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 250ms var(--animation-cube), opacity 250ms var(--animation-cube);
+}
+
+.example-discription {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  padding: 63px 24px;
+  font-size: 18px;
+  line-height: 1, 56;
+  color: var(--main-white-color);
+
+  opacity: 0;
+  transform: translateY(100%);
+  transition: transform 250ms var(--animation-cube), opacity 250ms var(--animation-cube);
+}
+
+.examples > li:hover .example-discription,
+.examples > li:hover .product-thumb::before {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.backdrope {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.backdrope.is-hidden {
+  pointer-events: none;
+  opacity: 0;
+}
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+  background: #ffffff;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.modal-button {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+
+  display: block;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+
+  background: var(--main-white-color);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
   cursor: pointer;
 }
